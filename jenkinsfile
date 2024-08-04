@@ -27,6 +27,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh "${tool 'SonarScanner'}/bin/sonar-scanner -Dsonar.projectKey=Calculator -Dsonar.sources=."
+
                 }
             }
         }
