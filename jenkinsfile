@@ -23,9 +23,12 @@ pipeline {
             }
         }
         stage('SonarQube Scan') {
+            environment {
+                scannerHome = tool 'SonarRunnerInstallation'
+            }
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh "${tool 'SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=Calculator -Dsonar.sources=. -Dsonar.host.url=http://172.17.0.3:9000 -X"
+                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=Calculator -Dsonar.sources=. -Dsonar.host.url=http://172.17.0.3:9000 -Dsonar.java.binaries=target/classes -X"
                 }
             }
         }
