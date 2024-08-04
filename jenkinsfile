@@ -3,8 +3,8 @@ pipeline {
 
     tools {
         maven 'Maven'
-        jdk 'JDK_11' 
-        // sonar 'SonarScanner'
+        jdk 'JDK_11'
+        sonar 'SonarScanner' // Make sure this matches the tool name configured in Jenkins
     }
 
     stages {
@@ -20,13 +20,12 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh "${tool 'Maven'}/bin/mvn package"                
+                sh "${tool 'Maven'}/bin/mvn package"
             }
         }
         stage('SonarQube Scan') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    // sh "${tool 'Maven'}/bin/mvn sonar:sonar -Dsonar.token=squ_dff72564cff3b4f315758c0c4326a0cda7eb1488"
                     sh "${tool 'SonarScanner'}/bin/sonar-scanner -Dsonar.projectKey=Calculator -Dsonar.sources=."
                 }
             }
