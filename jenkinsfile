@@ -4,7 +4,7 @@ pipeline {
     tools {
         maven 'Maven'
         jdk 'JDK_11' 
-        sonarqubeScanner 'SonarScanner'
+        hudson.plugins.sonar.SonarRunnerInstallation 'SonarScanner'
     }
 
     stages {
@@ -26,7 +26,8 @@ pipeline {
         stage('SonarQube Scan') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh "${tool 'Maven'}/bin/mvn sonar:sonar -Dsonar.token=squ_dff72564cff3b4f315758c0c4326a0cda7eb1488"
+                    // sh "${tool 'Maven'}/bin/mvn sonar:sonar -Dsonar.token=squ_dff72564cff3b4f315758c0c4326a0cda7eb1488"
+                    sh "${tool 'SonarScanner'}/bin/sonar-scanner -Dsonar.projectKey=Calculator -Dsonar.sources=."
                 }
             }
         }
