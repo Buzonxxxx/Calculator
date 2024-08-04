@@ -25,7 +25,7 @@ pipeline {
         stage('SonarQube Scan') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh "${tool 'SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=Calculator -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000"
+                    sh "${tool 'SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=Calculator -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -X"
                 }
             }
         }
