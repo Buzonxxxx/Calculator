@@ -22,6 +22,7 @@ pipeline {
             steps {
                 sh "${tool 'Maven'}/bin/mvn package"                
             }
+        }
         stage('SonarQube Scan') {
             steps {
                 withSonarQubeEnv('SonarQube') {
@@ -29,6 +30,5 @@ pipeline {
                 }
             }
         }
-        }       
     }
 }
