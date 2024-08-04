@@ -4,7 +4,6 @@ pipeline {
     tools {
         maven 'Maven'
         jdk 'JDK_11'
-        // Remove the invalid sonar tool reference
     }
 
     stages {
@@ -26,7 +25,7 @@ pipeline {
         stage('SonarQube Scan') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh "${tool 'SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=Calculator -Dsonar.sources=."
+                    sh "${tool 'SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=Calculator -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000"
                 }
             }
         }
